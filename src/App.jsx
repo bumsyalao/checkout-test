@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-// import ChatRoom from "../chat-room";
+import CommentSection from "./components/CommentSection";
 import Form from './components/Form';
 
 const StyledApp = styled.div`
+  background: #f5f5f5;
   display: grid;
   grid-template-rows: auto min-content;
   width: 100%;
@@ -51,8 +52,8 @@ useEffect(() => {
   console.log(comments, 'wtf');
   return (
     <StyledApp id="app">
-      {/* <ChatRoom comments={comments} /> */}
       <Form onSend={onSend} />
+      <CommentSection comments={comments} />
     </StyledApp>
   );
 };
