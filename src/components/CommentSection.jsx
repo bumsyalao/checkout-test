@@ -20,7 +20,17 @@ const StyledHeader = styled.h2`
 `;
 
 const StyledComment = styled.div`
-  margin: 10px;
+  display: flex;
+  flex-direction: row;
+`;
+const StyledAvatar = styled.img`
+  margin: 20px;
+  margin-left: 0px;
+  width: 2rem;
+  height: 2rem;
+`;
+const StyledCommentContent = styled.div`
+  // margin-top: -20px;
 `;
 const StyledHeading = styled.div`
   display: flex;
@@ -60,15 +70,18 @@ const CommentSection = ({ comments }) => {
         <StyledHeader>Latest Comments</StyledHeader>
         {comments.map(({ id, name, email, comment }) => (
           <StyledComment key={id}>
-            <StyledHeading>
-              <StyledName>
-                {name}
-              </StyledName>
-              <StyledEmail>
-                {email}
-              </StyledEmail>
-            </StyledHeading>
-        <StyledContent>{comment}</StyledContent>
+            <StyledAvatar src="https://api.adorable.io/avatars/41/abott@adorable.png"  alt="user avatar"/>
+            <StyledCommentContent>
+              <StyledHeading>
+                <StyledName>
+                  {name}
+                </StyledName>
+                <StyledEmail>
+                  {email}
+                </StyledEmail>
+              </StyledHeading>
+              <StyledContent>{comment}</StyledContent>
+            </StyledCommentContent>
           </StyledComment>
         ))}
       </StyledContainer>
