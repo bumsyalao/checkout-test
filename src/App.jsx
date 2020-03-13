@@ -49,7 +49,6 @@ useEffect(() => {
       .then(data => setComments(data));
   }, []);
 
-  console.log(comments, 'wtf');
   return (
     <StyledApp id="app">
       <Form onSend={onSend} />

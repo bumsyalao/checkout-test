@@ -49,8 +49,6 @@ const Form = ({ onSend }) => {
 
   const onSubmit = async event => {
     event.preventDefault();
-    console.log('new comment', newComment);
-
     onSend(newComment);
   };
 
