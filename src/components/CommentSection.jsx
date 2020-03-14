@@ -1,12 +1,11 @@
-import React, { useRef, useEffect } from "react";
-import styled from "styled-components";
+import React, { useRef, useEffect } from 'react';
+import styled from 'styled-components';
 import PropTypes from "prop-types";
 
 
 const StyledCommentSection = styled.div`
   padding: 10%;
-  padding-top: 5%;
-  overflow: auto;
+  padding-top: 0%;
 `;
 
 const StyledContainer = styled.div`

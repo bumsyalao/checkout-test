@@ -1,22 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import AnimatedImage from './components/AnimatedImage';
 import CommentSection from "./components/CommentSection";
 import Form from './components/Form';
 
 const StyledApp = styled.div`
   background: #f5f5f5;
-  display: grid;
-  grid-template-rows: auto min-content;
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  height: 100%;
-  position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   font-family: Arial, Helvetica, sans-serif;
 `;
-
+// const StyledContainer = styled.div`
+//   margin: 30px;
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: space-between;
+// `;
 const App = () => {
   const [comments, setComments] = useState([]);
 
@@ -41,7 +45,7 @@ const App = () => {
       );
   };
 
-useEffect(() => {
+  useEffect(() => {
     let url = "http://localhost:3001/comments"
     window
       .fetch(url)
@@ -51,7 +55,10 @@ useEffect(() => {
 
   return (
     <StyledApp id="app">
-      <Form onSend={onSend} />
+ 
+        
+        <AnimatedImage />
+        <Form onSend={onSend} />
       <CommentSection comments={comments} />
     </StyledApp>
   );

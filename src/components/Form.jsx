@@ -3,7 +3,9 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 const StyledForm = styled.form`
-  border-top: solid thin #ccc;
+  margin-top: 20px;
+  margin-left: 20px;
+  width: 50%;
   padding: 16px;
 `;
 const StyledContainer = styled.div`
