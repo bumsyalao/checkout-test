@@ -82,7 +82,7 @@ const Form = ({ onSend }) => {
             value={newComment.comment}
             required
           />
-          <StyledSendButton onClick={onSubmit} id="send-button" type="submit">
+          <StyledSendButton id="send-button" type="submit">
             Send
           </StyledSendButton>
         </StyledFormControl>

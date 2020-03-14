@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
+import { getDates } from './helpers';
 
 const rotate = keyframes`
-  // from {
-  //   transform: rotate(0deg);
-  // }
-  // to {
-  //   transform: rotate(180deg);
-  // }
-
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 `;
-
+const typing = keyframes`
+  from { width: 0 }
+  to { width: 100% }
+`;
 const swipeLeft = keyframes`
   10% {left: -50px;}
   75% {left: 10px;}
@@ -20,7 +23,13 @@ const swipeRight = keyframes`
   10% {right: 10px;}
   75% {right: -50px;}
 `;
-
+const pulse = keyframes`
+  50% {
+      transform: scale(1.3);
+      text-shadow: 0 0 1rem rgba(32, 28, 41, .8);
+      color: #b76fb7;
+  }
+  `
 
 const StyledAnimatedImage = styled.div`
   width:  50%;
@@ -62,7 +71,12 @@ const StyledStatement = styled.div`
   line-height: 15px;
   animation-name: ${swipeLeft};
   animation-duration: 2s;
-
+  display: ${props => props.hide ? 'none;' : ''}
+`;
+const StyledStateHeader = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 `;
 
 const StyledTransaction = styled.div`
@@ -81,18 +95,130 @@ const StyledTransaction = styled.div`
   line-height: 15px;
   animation-name: ${swipeRight};
   animation-duration: 2s;
+  display: ${props => props.hide ? 'none;' : ''}
+`;
+const StyledTransHeader = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 `;
 
+const StyledCalendarContent = styled.div`
+
+  display: grid;
+  width: 100%;
+  height: 80%;
+  padding-left: 3px;
+  padding-top: 38px;
+  grid-template-columns: 14% 14% 14% 14% 14% 14% 14%;
+  grid-template-rows: 20% 20% 20% 20% 20%;
+  grid-gap: 0;
+`;
+const StyledCalendarDay = styled.div`
+  cursor: pointer;
+  border: 0.1px solid #55657D;
+  color: #00B48F;
+  padding: 4px;
+  &:hover {
+    background-color: #fff;
+    animation: ${pulse} 1.5s;
+  }
+`;
+const StyledStatementButton = styled.span`
+  cursor: pointer;
+  color: #fff;
+  margin-right: 3px;
+  float: right;
+  font-size: 13px;
+  &:hover {
+    animation: ${pulse} 1.5s;
+  }
+  
+`;
+const StyledTransactionButton = styled.span`
+  cursor: pointer;
+  margin-right: 20px;
+  float: right;
+  color: #fff;
+  font-size: 13px;
+  &:hover {
+    animation: ${pulse} 1.5s;
+  }
+`;
+
+const StyledCloseButton = styled.span`
+  cursor: pointer;
+  color: #aaaaaa;
+  right: 10px;
+  font-size: 18px;
+  font-weight: bold;
+`;
+
+const StyledStateContent = styled.div`
+  margin: 22px;
+`;
+
+const StyledStateContentHeading = styled.h4`
+  color: #00B48F;
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  animation: ${typing} 3.5s steps(30, end);
+  animation-delay: 3s;
+  // @media (max-width: 600px) {
+  //     font-size: 2.5rem;
+  //     width: 100%;
+  //   }
+`;
+
+const StyledTransContent = styled.div`
+  margin: 40px;
+`;
+const StyledTransContentNum = styled.h1`
+  color: #f3c25d;
+  animation: ${rotate} 2s ;
+  animation-delay: 3s;
+`;
+
+const months = getDates(new Date("Mar 01 2020"));
 
 const AnimatedImage = () => {
-  return(
+  const [hideStatement, setHideStatement] = useState(false);
+  const [hideTrans, setHideTrans] = useState(false);
+  return (
     <StyledAnimatedImage>
       <StyledContainer>
         <StyledCalendar>
           Calendar
+          <StyledStatementButton onClick={() => setHideStatement(false)}>Statement</StyledStatementButton>
+          <StyledTransactionButton onClick={() => setHideTrans(false)}>Transactions</StyledTransactionButton>
+          <StyledCalendarContent>
+            {months.map(({ date }) =>
+              <StyledCalendarDay>{date}</StyledCalendarDay>
+            )}
+          </StyledCalendarContent>
         </StyledCalendar>
-        <StyledStatement>Statement</StyledStatement>
-        <StyledTransaction>Transaction</StyledTransaction>
+        <StyledStatement hide={hideStatement}>
+          <StyledStateHeader>
+            Statement
+          <StyledCloseButton onClick={() => setHideStatement(true)}>&times;</StyledCloseButton>
+          </StyledStateHeader>
+          <StyledStateContent>
+            <StyledStateContentHeading>Your monthly statement is...</StyledStateContentHeading>
+          </StyledStateContent>
+        </StyledStatement>
+        <StyledTransaction hide={hideTrans}>
+          <StyledTransHeader>
+            Transactions
+        <StyledCloseButton onClick={() => setHideTrans(true)}>&times;</StyledCloseButton>
+          </StyledTransHeader>
+          <StyledTransContent>
+            <StyledTransContentNum>
+              10,960,000USD
+            </StyledTransContentNum>
+            Monthly Transactions
+          </StyledTransContent>
+        </StyledTransaction>
       </StyledContainer>
     </StyledAnimatedImage>
   )
