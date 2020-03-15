@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
-import { getDates } from './helpers';
+import Table from './Table';
+import { getDates } from '../helpers';
 
 const rotate = keyframes`
   from {
@@ -42,7 +43,6 @@ const StyledContainer = styled.div`
 `;
 
 const StyledCalendar = styled.div`
-  // animation: ${rotate} 2s linear;
   padding: 12px;
   margin-top: 41px;
   position: relative;
@@ -63,7 +63,7 @@ const StyledStatement = styled.div`
   width: 40%;
   height: 320px;
   left: 58%;
-  background: #FFFFFF;
+  background: #FEFDFB;
   box-shadow: 0px 1px 3px rgba(0,18,44,0.13);
   border-radius: 4px;
   font-family: Graphik LCG;
@@ -87,7 +87,7 @@ const StyledTransaction = styled.div`
   right: 10%;
   margin-top: -15%;
   top: 1;
-  background: #FFFFFF;
+  background: #FEFDFB;
   box-shadow: 0px 1px 3px rgba(0,18,44,0.13);
   border-radius: 4px;
   font-family: Graphik LCG;
@@ -103,6 +103,11 @@ const StyledTransHeader = styled.div`
   justify-content: space-between;
 `;
 
+const StyledCalenderHeader = styled.div`
+  color: #f3c25d;
+
+`;
+
 const StyledCalendarContent = styled.div`
 
   display: grid;
@@ -114,16 +119,24 @@ const StyledCalendarContent = styled.div`
   grid-template-rows: 20% 20% 20% 20% 20%;
   grid-gap: 0;
 `;
-const StyledCalendarDay = styled.div`
+
+const StyledCalendarMonth = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   cursor: pointer;
   border: 0.1px solid #55657D;
-  color: #00B48F;
   padding: 4px;
+  color: #00B48F;
   &:hover {
     background-color: #fff;
     animation: ${pulse} 1.5s;
   }
 `;
+
+const StyledCalendarDay = styled.div``;
+const StyledCalendarDate = styled.div``;
+
 const StyledStatementButton = styled.span`
   cursor: pointer;
   color: #fff;
@@ -159,7 +172,9 @@ const StyledStateContent = styled.div`
 `;
 
 const StyledStateContentHeading = styled.h4`
-  color: #00B48F;
+  color: #000;
+  font-family: 'Noto Serif', serif;
+  font-size: 15px;
   overflow: hidden; /* Ensures the content is not revealed until the animation */
   white-space: nowrap; /* Keeps the content on a single line */
   margin: 0 auto; /* Gives that scrolling effect as the typing happens */
@@ -175,9 +190,12 @@ const StyledTransContent = styled.div`
   margin: 40px;
 `;
 const StyledTransContentNum = styled.h1`
-  color: #f3c25d;
+  color: #e64e64;
   animation: ${rotate} 2s ;
   animation-delay: 3s;
+  &:hover{
+    animation: ${rotate} 2s ;
+  }
 `;
 
 const months = getDates(new Date("Mar 01 2020"));
@@ -193,8 +211,14 @@ const AnimatedImage = () => {
           <StyledStatementButton onClick={() => setHideStatement(false)}>Statement</StyledStatementButton>
           <StyledTransactionButton onClick={() => setHideTrans(false)}>Transactions</StyledTransactionButton>
           <StyledCalendarContent>
-            {months.map(({ date }) =>
-              <StyledCalendarDay>{date}</StyledCalendarDay>
+            <StyledCalenderHeader>
+              March
+            </StyledCalenderHeader>
+            {months.map(({ date, day }) =>
+              <StyledCalendarMonth>
+                <StyledCalendarDate>{date}</StyledCalendarDate>
+                <StyledCalendarDay>{day}</StyledCalendarDay>
+              </StyledCalendarMonth>
             )}
           </StyledCalendarContent>
         </StyledCalendar>
@@ -204,7 +228,8 @@ const AnimatedImage = () => {
           <StyledCloseButton onClick={() => setHideStatement(true)}>&times;</StyledCloseButton>
           </StyledStateHeader>
           <StyledStateContent>
-            <StyledStateContentHeading>Your monthly statement is...</StyledStateContentHeading>
+            <StyledStateContentHeading>Your monthly statement</StyledStateContentHeading>
+            <Table />
           </StyledStateContent>
         </StyledStatement>
         <StyledTransaction hide={hideTrans}>

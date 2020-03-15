@@ -46,7 +46,7 @@ const Form = ({ onSend }) => {
   });
 
   const onChange = ({ target }) => {
-    setNewComment({...newComment, [target.id]: target.value});
+    setNewComment({ ...newComment, [target.id]: target.value });
   };
 
   const onSubmit = async event => {
