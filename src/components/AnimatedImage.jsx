@@ -5,7 +5,7 @@ import Table from './Table';
 import AnimatedMap from './AnimatedMap';
 import { getDates } from '../helpers';
 
-
+const moment = require('moment');
 const rotate = keyframes`
   from {
     transform: rotate(0deg);
@@ -115,9 +115,15 @@ const StyledTransHeader = styled.div`
 `;
 
 const StyledCalenderHeader = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
   color: #f3c25d;
 
 `;
+const StyledDate = styled.span``;
+const StyledDay = styled.span``;
 
 const StyledCalendarContent = styled.div`
 
@@ -225,6 +231,8 @@ const AnimatedImage = () => {
           <StyledCalendarContent>
             <StyledCalenderHeader>
               March
+              <StyledDay>{moment().format('Do')}</StyledDay>
+              <StyledDate>{moment().format('dddd')}</StyledDate>
             </StyledCalenderHeader>
             {months.map(({ date, day }) =>
               <StyledCalendarMonth>
