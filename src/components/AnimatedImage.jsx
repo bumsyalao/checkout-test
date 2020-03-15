@@ -1,7 +1,10 @@
+/* eslint-disable jsx-a11y/accessible-emoji */
 import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import Table from './Table';
+import AnimatedMap from './AnimatedMap';
 import { getDates } from '../helpers';
+
 
 const rotate = keyframes`
   from {
@@ -11,6 +14,14 @@ const rotate = keyframes`
     transform: rotate(360deg);
   }
 `;
+const bounce = keyframes`
+  from, to {
+    transform: translateY(30vh) scaleY(.98);
+  }
+  80% {
+    transform: translateY(15vh) scaleY(1.02);
+  }
+`
 const typing = keyframes`
   from { width: 0 }
   to { width: 100% }
@@ -64,7 +75,7 @@ const StyledStatement = styled.div`
   height: 320px;
   left: 58%;
   background: #FEFDFB;
-  box-shadow: 0px 1px 3px rgba(0,18,44,0.13);
+  box-shadow: 10px 0px 5px 0px rgba(0,18,44,0.13);
   border-radius: 4px;
   font-family: Graphik LCG;
   font-size: 13px;
@@ -88,7 +99,7 @@ const StyledTransaction = styled.div`
   margin-top: -15%;
   top: 1;
   background: #FEFDFB;
-  box-shadow: 0px 1px 3px rgba(0,18,44,0.13);
+  box-shadow: 0px 10px 5px rgba(0,18,44,0.13);
   border-radius: 4px;
   font-family: Graphik LCG;
   font-size: 13px;
@@ -145,8 +156,8 @@ const StyledStatementButton = styled.span`
   font-size: 13px;
   &:hover {
     animation: ${pulse} 1.5s;
+    color: #f3c25d !important;
   }
-  
 `;
 const StyledTransactionButton = styled.span`
   cursor: pointer;
@@ -156,6 +167,7 @@ const StyledTransactionButton = styled.span`
   font-size: 13px;
   &:hover {
     animation: ${pulse} 1.5s;
+    color: #f3c25d !important;
   }
 `;
 
@@ -225,7 +237,8 @@ const AnimatedImage = () => {
         <StyledStatement hide={hideStatement}>
           <StyledStateHeader>
             Statement
-          <StyledCloseButton onClick={() => setHideStatement(true)}>&times;</StyledCloseButton>
+          <StyledCloseButton role='img' aria-label='push-pin'
+              onClick={() => setHideStatement(true)}>&#128204;</StyledCloseButton>
           </StyledStateHeader>
           <StyledStateContent>
             <StyledStateContentHeading>Your monthly statement</StyledStateContentHeading>
@@ -235,13 +248,14 @@ const AnimatedImage = () => {
         <StyledTransaction hide={hideTrans}>
           <StyledTransHeader>
             Transactions
-        <StyledCloseButton onClick={() => setHideTrans(true)}>&times;</StyledCloseButton>
+        <StyledCloseButton role='img' aria-label='push-pin'
+              onClick={() => setHideTrans(true)}>&#128204;</StyledCloseButton>
           </StyledTransHeader>
           <StyledTransContent>
             <StyledTransContentNum>
               10,960,000USD
             </StyledTransContentNum>
-            Monthly Transactions
+            <AnimatedMap />
           </StyledTransContent>
         </StyledTransaction>
       </StyledContainer>

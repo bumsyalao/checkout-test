@@ -15,17 +15,11 @@ const StyledApp = styled.div`
   bottom: 0;
   font-family: Arial, Helvetica, sans-serif;
 `;
-// const StyledContainer = styled.div`
-//   margin: 30px;
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: space-between;
-// `;
+
 const App = () => {
   const [comments, setComments] = useState([]);
 
   const onSend = comment => {
-
     fetch("http://localhost:3001/comments", {
       method: "POST",
       body: JSON.stringify({
@@ -55,10 +49,8 @@ const App = () => {
 
   return (
     <StyledApp id="app">
- 
-        
-        <AnimatedImage />
-        <Form onSend={onSend} />
+      <AnimatedImage />
+      <Form onSend={onSend} />
       <CommentSection comments={comments} />
     </StyledApp>
   );

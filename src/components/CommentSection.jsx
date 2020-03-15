@@ -69,7 +69,7 @@ const CommentSection = ({ comments }) => {
         <StyledHeader>Latest Comments</StyledHeader>
         {comments.map(({ id, name, email, comment }) => (
           <StyledComment key={id}>
-            <StyledAvatar src="https://api.adorable.io/avatars/41/abott@adorable.png"  alt="user avatar"/>
+            <StyledAvatar src="https://api.adorable.io/avatars/41/abott@adorable.png" alt="user avatar" />
             <StyledCommentContent>
               <StyledHeading>
                 <StyledName>
