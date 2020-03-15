@@ -14,14 +14,14 @@ const rotate = keyframes`
     transform: rotate(360deg);
   }
 `;
+
 const bounce = keyframes`
-  from, to {
-    transform: translateY(30vh) scaleY(.98);
-  }
-  80% {
-    transform: translateY(15vh) scaleY(1.02);
-  }
-`
+  0%   { transform: translateY(0); }
+  30%  { transform: translateY(-100px); }
+  50%  { transform: translateY(0); }
+  100% { transform: translateY(0); }
+`;
+
 const typing = keyframes`
   from { width: 0 }
   to { width: 100% }
@@ -115,11 +115,15 @@ const StyledTransHeader = styled.div`
 `;
 
 const StyledCalenderHeader = styled.div`
+  font-size: 16px;
   align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   color: #f3c25d;
+  &:hover {
+    animation: ${pulse} 1.5s;
+  }
 
 `;
 const StyledDate = styled.span``;
